@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ampt/data": "^1",
-    "@ampt/nextjs": "^2",
+    "@ampt/nextjs": "^2.0.7",
     "@ampt/sdk": "^1",
     "next": "13.5.4",
     "react": "^18",
@@ -32,5 +32,8 @@
     "app": "ampt-icon-generator",
     "runtime": "nodejs18",
     "org": "sohamtamboli861135"
-  }
+  },
+  "files": [
+    "*"
+  ]
 }
