@@ -103,6 +103,7 @@ export default function SignupForm() {
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
+                  type="password"
                   placeholder="re-enter your password"
                   value={formState.confirmPassword}
                   onChange={handleInputChange}
