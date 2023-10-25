@@ -2,31 +2,35 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, FormEvent } from 'react'
-import profile from './profile.svg'
-export default function Signup_Form() {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
+interface FormState {
+  email: string
+  password: string
+  confirmPassword: string
+}
+export default function SignupForm() {
+  const [errors, setErrors] = useState<string[]>([])
+  const [formState, setFormState] = useState<FormState>({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  })
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
-  }
-  const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setConfirmPassword(event.target.value)
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    if (password !== confirmPassword) {
-      alert('Passwords do not match')
+    if (formState.password !== formState.confirmPassword) {
+      setErrors(['Passwords do not match!!!'])
     } else {
-      console.log('email is :' + email)
-      console.log('password is :' + password)
+      setErrors([])
+      console.log('email is :' + formState.email)
+      console.log('password is :' + formState.password)
     }
   }
   return (
@@ -41,7 +45,7 @@ export default function Signup_Form() {
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-2 mt-5 flex justify-center">
             <Image
-              src={profile}
+              src="/images/profile.svg"
               width={100}
               height={100}
               alt="Picture of the user"
@@ -68,8 +72,8 @@ export default function Signup_Form() {
                   autoComplete="email"
                   placeholder="enter your email adress"
                   required
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={formState.email}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -92,20 +96,28 @@ export default function Signup_Form() {
                   placeholder="enter your password"
                   autoComplete="current-password"
                   required
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={formState.password}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 <input
                   id="confirmPassword"
+                  name="confirmPassword"
                   placeholder="re-enter your password"
-                  value={confirmPassword}
-                  onChange={handleConfirmPasswordChange}
+                  value={formState.confirmPassword}
+                  onChange={handleInputChange}
                   className="mt-3  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-
+            {errors.length > 0 && (
+              <div
+                className=" rounded-lg bg-red-50 p-2  text-sm text-red-800 dark:text-red-400"
+                role="alert"
+              >
+              <span className="font-medium">{errors[0]}</span>
+              </div>
+            )}
             <div>
               <button
                 type="submit"

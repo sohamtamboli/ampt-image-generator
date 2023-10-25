@@ -1,44 +1,51 @@
 'use client'
 import Link from 'next/link'
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
 import Image from 'next/image'
-import profile from './profile.svg'
-export default function Login_Form() {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
+
+interface FormState {
+  email: string
+  password: string
+}
+
+export default function LoginForm() {
+  const [formState, setFormState] = useState<FormState>({
+    email: '',
+    password: '',
+  })
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    console.log('email is :' + email)
-    console.log('password is :' + password)
-  }
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
+    console.log('email is :' + formState.email)
+    console.log('password is :' + formState.password)
   }
 
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-         
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
-       
         </div>
-        
+
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-        <div className="flex justify-center mt-5 mb-2">
-      <Image
-        src={profile}
-        width={100}
-        height={100}
-        alt="Picture of the user"
-      />
-    </div>
+          <div className="mb-2 mt-5 flex justify-center">
+            <Image
+              src='/images/profile.svg'
+              width={100}
+              height={100}
+              alt="Picture of the user"
+            />
+          </div>
           <form
             className="space-y-6"
             action="#"
@@ -60,8 +67,8 @@ export default function Login_Form() {
                   autoComplete="email"
                   placeholder="enter your email adress"
                   required
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={formState.email}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -84,8 +91,8 @@ export default function Login_Form() {
                   autoComplete="current-password"
                   placeholder="enter your password"
                   required
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={formState.password}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
