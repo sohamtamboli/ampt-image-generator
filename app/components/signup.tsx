@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, FormEvent } from 'react'
-
+import profile from './profile.svg'
 export default function Signup_Form() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -31,23 +31,22 @@ export default function Signup_Form() {
   }
   return (
     <>
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign up to an account
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="mb-2 mt-5 flex justify-center">
+            <Image
+              src={profile}
+              width={100}
+              height={100}
+              alt="Picture of the user"
+            />
+          </div>
           <form
             className="space-y-6"
             action="#"
@@ -122,7 +121,7 @@ export default function Signup_Form() {
               href="/login"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Signin
+              Sign in
             </Link>
           </p>
         </div>

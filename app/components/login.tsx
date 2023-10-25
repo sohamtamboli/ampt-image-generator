@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link'
 import { useState, FormEvent } from 'react'
-
+import Image from 'next/image'
+import profile from './profile.svg'
 export default function Login_Form() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -22,12 +23,22 @@ export default function Login_Form() {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+         
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
+       
         </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="flex justify-center mt-5 mb-2">
+      <Image
+        src={profile}
+        width={100}
+        height={100}
+        alt="Picture of the user"
+      />
+    </div>
           <form
             className="space-y-6"
             action="#"
