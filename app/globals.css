@@ -6,3 +6,16 @@ body {
   background: #fff;
   color: #000;
 }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-container {
+  flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
+}

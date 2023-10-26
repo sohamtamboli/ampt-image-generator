@@ -10,9 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ampt/data": "^1",
-    "@ampt/nextjs": "^2.0.7",
-    "@ampt/sdk": "^1",
+    "@ampt/cli": "^1.0.13",
+    "@ampt/data": "^1.0.8",
+    "@ampt/nextjs": "^2.0.11",
+    "@ampt/sdk": "^1.0.5",
+    "@headlessui/react": "^1.7.17",
     "@tailwindcss/forms": "^0.5.6",
     "next": "^13.5.6",
     "react": "^18",
