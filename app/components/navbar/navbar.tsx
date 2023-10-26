@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link legacyBehavior href="/signin">
+                          <Link legacyBehavior href="/login">
                             <a
                               className={classNames(
                                 active ? 'bg-gray-100' : '',

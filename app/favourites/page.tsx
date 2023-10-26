@@ -1,11 +1,17 @@
-import React from 'react'
+import React from 'react';
+import Layout from '../components/layout';
+
 
 const Favourites = () => {
   return (
     <div>
-      <h1>all the favoutaites will be saved here</h1>
+      <Layout>
+        <div>
+          <h1>all favourites will be saved here</h1>
+        </div>
+      </Layout>
     </div>
-  )
-}
+  );
+};
 
-export default Favourites
+export default Favourites;

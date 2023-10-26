@@ -1,13 +1,13 @@
 import React from 'react'
 import Layout from '../components/layout'
-import SearchBar from '../components/searchbar/searchbar'
+import PromtBar from '../components/promtbar/promtbar'
 import ImageGrid from '../components/imagegrid/imagegrid'
 
 const HomePage = () => {
   return (
     <div className="main-container">
       <Layout >
-    <SearchBar/>
+    <PromtBar/>
     <ImageGrid/>
       </Layout>
     </div>

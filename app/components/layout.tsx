@@ -6,9 +6,12 @@ type Props = {
   }
   const Layout: React.FC<Props> = ({ children }) => {
     return (
-      <div className="min-h-screen flex flex-col layout-container">
+      <div className="min-h-screen flex flex-col">
         <Navbar />
+        <div className="flex-1">
         {children}
+        </div>
+      
         <Footer/>
       </div>
     )

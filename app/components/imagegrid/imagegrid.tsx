@@ -17,22 +17,25 @@ const ImageGrid: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.photos) {
-          setPhotos(data.photos as Photo[]) 
+          const firstNinePhotos = data.photos.slice(0, 9);
+          setPhotos(firstNinePhotos as Photo[]) 
         }
       })
       .catch((error) => console.error(error))
   }, [])
 
   return (
-    <div className=" mx-auto grid h-3/6 w-3/5 grid-cols-1 gap-4 p-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+    <div className="mt-14">
+    <div className=" mx-auto grid h-3/6 w-3/5 grid-cols-3 gap-4 p-4 pt-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 border-4   border-solid rounded-lg">
       {photos.map((photo) => (
         <div
           key={photo.id.toString()}
-          className="overflow-hidden rounded-lg shadow-lg"
+          className=" rounded-lg shadow-lg"
         >
             <Image
             src={photo.url}
             alt={photo.id.toString()}
+            //style={{ height: '300px', width: '300px' }}
             className="h-auto w-full"
             height={100}
             width={100}
@@ -40,6 +43,7 @@ const ImageGrid: React.FC = () => {
          
         </div>
       ))}
+    </div>
     </div>
   )
 }
