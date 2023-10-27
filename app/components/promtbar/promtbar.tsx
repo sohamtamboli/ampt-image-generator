@@ -24,7 +24,7 @@ const SearchBar: React.FC = () => {
             <input
               type="search"
               id="default-search"
-          className="mt-20 flex w-9/12 rounded-3xl border border-gray-300 bg-white p-5 pl-10 text-base focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 shadow-gray-200 shadow-lg "
+          className=" mt-20 flex w-9/12 rounded-3xl border border-gray-300 bg-white p-5 pl-10 text-base focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 shadow-gray-200 shadow-lg "
               placeholder="Type your command ,we will generate images for you"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
