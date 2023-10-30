@@ -35,7 +35,7 @@ const ImageGrid: React.FC = () => {
             <Image
             src={photo.url}
             alt={photo.id.toString()}
-            //style={{ height: '300px', width: '300px' }}
+          
             className="h-auto w-full"
             height={100}
             width={100}

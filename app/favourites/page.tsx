@@ -1,13 +1,13 @@
 import React from 'react';
 import Layout from '../components/layout';
-
+import ImageGridFav from '../components/imagegridfav/imagegridfav';
 
 const Favourites = () => {
   return (
     <div>
       <Layout>
         <div>
-          <h1>all favourites will be saved here</h1>
+          <ImageGridFav />
         </div>
       </Layout>
     </div>

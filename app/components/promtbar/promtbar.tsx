@@ -24,7 +24,7 @@ const SearchBar: React.FC = () => {
           />
           <button
             type="submit"
-            className="absolute bottom-2.5 right-2.5 mr-80 rounded-3xl  bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 "
+            className=" absolute bottom-2.5 right-2.5  mr-76 rounded-3xl  bg-blue-700 px-8 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 "
           >
             Generate
           </button>
