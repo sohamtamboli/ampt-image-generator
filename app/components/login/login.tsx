@@ -1,32 +1,60 @@
-'use client'
-import Link from 'next/link'
-import { useState, FormEvent, ChangeEvent } from 'react'
-import Image from 'next/image'
-
+'use client';
+import Link from 'next/link';
+import { useState, FormEvent, ChangeEvent } from 'react';
+import Image from 'next/image';
+import UserPool from '@/app/UserPool';
+import { useRouter } from 'next/navigation';
+import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 
 interface FormState {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export default function LoginForm() {
+  const router = useRouter();
+  const [error, setError] = useState<string>("");
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
-  })
+  });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     setFormState((prevState) => ({
       ...prevState,
       [name]: value,
-    }))
-  }
+    }));
+  };
   const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    console.log('email is :' + formState.email)
-    console.log('password is :' + formState.password)
-  }
+    event.preventDefault();
+    event.preventDefault();
+
+    const user = new CognitoUser({
+      Username: formState.email,
+      Pool: UserPool,
+    });
+    const authDetails = new AuthenticationDetails({
+      Username: formState.email,
+      Password: formState.password,
+    });
+
+    user.authenticateUser(authDetails, {
+      onSuccess: (data) => {
+        console.log("onsucess : ", data);
+        setError('')
+        router.push('/home')
+      },
+      onFailure:(err)=> {
+        console.error("onFailure : ", err);
+        setError("Login failed. Please check your credentials.");
+      },
+      newPasswordRequired: (data) => {
+        console.log("onsucess : ", data);
+      },
+     
+    });
+  };
 
   return (
     <>
@@ -40,7 +68,7 @@ export default function LoginForm() {
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-2 mt-5 flex justify-center">
             <Image
-              src='/images/profile.svg'
+              src="/images/profile.svg"
               width={100}
               height={100}
               alt="Picture of the user"
@@ -72,6 +100,7 @@ export default function LoginForm() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+             
             </div>
 
             <div>
@@ -96,6 +125,7 @@ export default function LoginForm() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              {error && <span className="text-red-500">{error}</span>}
             </div>
 
             <div>
@@ -120,5 +150,5 @@ export default function LoginForm() {
         </div>
       </div>
     </>
-  )
+  );
 }
