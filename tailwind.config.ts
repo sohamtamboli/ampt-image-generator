@@ -6,6 +6,13 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  theme: {
+    extend: {
+      margin: {
+        '76': '308px',
+      },
+    },
+  },
   plugins: [
     require('@tailwindcss/forms'),
   ],
