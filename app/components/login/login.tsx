@@ -1,23 +1,25 @@
 'use client';
 import Link from 'next/link';
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useContext } from 'react';
 import Image from 'next/image';
-import UserPool from '@/app/UserPool';
-import { useRouter } from 'next/navigation';
-import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
-
+//import UserPool from '@/app/UserPool';
+// import { useRouter } from 'next/navigation';
+// import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+import { AccountContext } from '../context/accountcontext';
+import Cookies from 'js-cookie';
 interface FormState {
   email: string;
   password: string;
 }
 
 export default function LoginForm() {
-  const router = useRouter();
-  const [error, setError] = useState<string>("");
+  // const router = useRouter();
+
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
   });
+  const { authenticate, error } = useContext(AccountContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -28,32 +30,16 @@ export default function LoginForm() {
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    event.preventDefault();
-
-    const user = new CognitoUser({
-      Username: formState.email,
-      Pool: UserPool,
-    });
-    const authDetails = new AuthenticationDetails({
-      Username: formState.email,
-      Password: formState.password,
-    });
-
-    user.authenticateUser(authDetails, {
-      onSuccess: (data) => {
-        console.log("onsucess : ", data);
-        setError('')
-        router.push('/home')
-      },
-      onFailure:(err)=> {
-        console.error("onFailure : ", err);
-        setError("Login failed. Please check your credentials.");
-      },
-      newPasswordRequired: (data) => {
-        console.log("onsucess : ", data);
-      },
-     
-    });
+    authenticate(formState.email, formState.password)
+      .then((data) => {
+        const jwtToken = data.idToken.jwtToken;
+        console.log('ID Token Data:', jwtToken);
+        Cookies.set('jwtToken', jwtToken);
+        console.log('logged in ', data);
+      })
+      .catch((err) => {
+        console.error(' failed to login ', err);
+      });
   };
 
   return (
@@ -100,7 +86,6 @@ export default function LoginForm() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
-             
             </div>
 
             <div>
