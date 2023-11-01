@@ -6,7 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { AccountContext } from '../context/accountcontext';
-import Cookies from 'js-cookie';
+
+
 
 function classNames(...classes: (false | null | undefined | string)[]) {
   return classes.filter(Boolean).join(' ');
@@ -24,8 +25,7 @@ const Navbar: React.FC = () => {
         setstatus(true);
        console.log(Session.idToken.payload.name);
        setUserName(Session.idToken.payload.name)
-       console.log('idToken', Session.idToken.jwtToken);
-       Cookies.set('idToken', Session.idToken.jwtToken);
+    
 
       })
       .catch((err) => {

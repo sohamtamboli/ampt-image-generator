@@ -7,6 +7,7 @@ import {
 } from 'amazon-cognito-identity-js';
 import Pool from '@/app/UserPool';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 interface IContext {
   authenticate: (Username: string, Password: string) => Promise<any>;
@@ -28,23 +29,22 @@ const Account: React.FC<AccountProps> = (props) => {
   const router = useRouter();
   const [error, setError] = useState<string>('');
 
-
-  const getSession =async() =>{
-    return await new Promise((resolve,reject)=>{
-        const user =Pool.getCurrentUser();
-        if (user) {
-            user.getSession((err: any,session:CognitoUserSession)=>{
-                if (err) {
-                   reject() 
-                } else {
-                    resolve(session)
-                }
-            })
-        } else {
-            reject()
-        }
-    })
-}
+  const getSession = async () => {
+    return await new Promise((resolve, reject) => {
+      const user = Pool.getCurrentUser();
+      if (user) {
+        user.getSession((err: any, session: CognitoUserSession) => {
+          if (err) {
+            reject();
+          } else {
+            resolve(session);
+          }
+        });
+      } else {
+        reject();
+      }
+    });
+  };
 
   const authenticate = async (Username: string, Password: string) => {
     return new Promise((resolve, reject) => {
@@ -79,6 +79,7 @@ const Account: React.FC<AccountProps> = (props) => {
   const Logout = () => {
     const user = Pool.getCurrentUser();
     if (user) {
+      Cookies.remove('jwtToken')
       user.signOut();
     }
   };
