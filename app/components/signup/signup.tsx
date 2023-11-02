@@ -300,7 +300,7 @@ export default function SignupForm() {
 
               <div>
                 <p className="mt-10 text-center text-sm text-gray-500">
-                  Didn't receive OTP???
+                 Didn&apos;t receive OTP???
                   <a
                     href="#"
                     onClick={handleResendOtp}
