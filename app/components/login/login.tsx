@@ -7,6 +7,7 @@ import Image from 'next/image';
 // import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
+import Profile from '@/public/images/profile.svg'
 interface FormState {
   email: string;
   password: string;
@@ -54,7 +55,7 @@ export default function LoginForm() {
         <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="mb-2 mt-5 flex justify-center">
             <Image
-              src="/images/profile.svg"
+              src={Profile}
               width={100}
               height={100}
               alt="Picture of the user"

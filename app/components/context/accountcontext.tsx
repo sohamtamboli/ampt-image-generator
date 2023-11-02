@@ -66,7 +66,7 @@ const Account: React.FC<AccountProps> = (props) => {
         },
         onFailure: (err) => {
           console.error('onFailure : ', err);
-          setError('Login failed. Please check your credentials.');
+          setError(err.message);
           reject(err);
         },
         newPasswordRequired: (data) => {
