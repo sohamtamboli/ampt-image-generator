@@ -10,17 +10,25 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ampt/cli": "^1.0.14",
+    "@ampt/cli": "^1.0.15",
     "@ampt/data": "^1.0.8",
     "@ampt/nextjs": "^2.0.11",
     "@ampt/sdk": "^1.0.5",
     "@headlessui/react": "^1.7.17",
     "@tailwindcss/forms": "^0.5.6",
+    "amazon-cognito-identity-js": "^6.3.6",
+    "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "js-cookie": "^3.0.5",
     "next": "^13.5.6",
+    "query-string": "^8.1.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.3",
+    "@types/js-cookie": "^3.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

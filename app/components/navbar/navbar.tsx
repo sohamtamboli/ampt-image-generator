@@ -1,16 +1,38 @@
 'use client';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
+import { AccountContext } from '../context/accountcontext';
+
+
 
 function classNames(...classes: (false | null | undefined | string)[]) {
   return classes.filter(Boolean).join(' ');
 }
 
 const Navbar: React.FC = () => {
+  const [status, setstatus] = useState(false);
+  const [userName, setUserName] = useState<string>('');
+  const { getSession, Logout } = useContext(AccountContext);
+
+  useEffect(() => {
+    getSession()
+      .then((Session) => {
+        console.log('session', Session);
+        setstatus(true);
+       console.log(Session.idToken.payload.name);
+       setUserName(Session.idToken.payload.name)
+    
+
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  
   const pathname = usePathname();
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -58,7 +80,6 @@ const Navbar: React.FC = () => {
                 <div>
                   <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="absolute -inset-1.5" />
-                    <span className="sr-only">Open user menu</span>
                     <Image
                       src="/images/navprofile.svg"
                       alt="fav"
@@ -86,6 +107,20 @@ const Navbar: React.FC = () => {
                               'block px-4 py-2 text-sm text-gray-700',
                             )}
                           >
+                            {status ? userName : 'please login'}
+                          </a>
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link legacyBehavior href="/favourites">
+                          <a
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700',
+                            )}
+                          >
                             favourites
                           </a>
                         </Link>
@@ -95,6 +130,7 @@ const Navbar: React.FC = () => {
                       {({ active }) => (
                         <Link legacyBehavior href="/login">
                           <a
+                            onClick={Logout}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700',

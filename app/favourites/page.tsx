@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import ImageGridFav from '../components/imagegridfav/imagegridfav';
 
-const Favourites = () => {
+const Favourites: React.FC  = () => {
   return (
     <div>
       <Layout>
