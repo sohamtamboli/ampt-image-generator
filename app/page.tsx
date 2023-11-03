@@ -6,9 +6,5 @@ export const revalidate = 0;
 import { Account } from './components/context/accountcontext';
 import LoginForm from './components/login/login';
 export default function Home() {
-  return (
-    <Account>
-      <LoginPage />
-    </Account>
-  );
+  return <LoginPage />;
 }

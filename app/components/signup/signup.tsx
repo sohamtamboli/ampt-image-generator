@@ -5,9 +5,11 @@ import { useState, FormEvent, useContext } from 'react';
 import { CognitoUser, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import UserPool from '@/app/UserPool';
 import { useRouter } from 'next/navigation';
-import Profile from '@/public/images/profile.svg'
+import Profile from '@/public/images/profile.svg';
+import mail from '@/public/images/mail.svg';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
+
 interface FormState {
   email: string;
   password: string;
@@ -17,10 +19,9 @@ interface FormState {
 export default function SignupForm() {
   const [otp, setOtp] = useState('');
   const [registered, setregistered] = useState(false);
-  const [otperror, setotperror] = useState('');
+  const [message, setMessage] = useState('');
   const [errors, setErrors] = useState<string[]>([]);
   const [registrationerror, setregistrationerror] = useState('');
-  const [resendotp, setresendotp] = useState('');
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
@@ -28,7 +29,7 @@ export default function SignupForm() {
     username: '',
   });
   const router = useRouter();
-  const { authenticate, } = useContext(AccountContext);// added new
+  const { authenticate } = useContext(AccountContext); // added new
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -87,23 +88,23 @@ export default function SignupForm() {
     cognitoUser.confirmRegistration(otp, true, (err, result) => {
       if (err) {
         console.log(err);
-        setotperror('invalid otp');
+        setMessage(err.message);
         // Handle error
       } else {
         console.log(result);
         // OTP verification successful, proceed with further actions
         authenticate(formState.email, formState.password)
-        .then((data) => {
-          const jwtToken = data.idToken.jwtToken;
-          console.log('ID Token Data:', jwtToken);
-          Cookies.set('jwtToken', jwtToken);
-          console.log('logged in ', data);
-          router.push('/home');
-        })
-        .catch((err) => {
-          console.error(' failed to login ', err);
-        });
-     
+          .then((data) => {
+            const jwtToken = data.idToken.jwtToken;
+            console.log('ID Token Data:', jwtToken);
+            Cookies.set('jwtToken', jwtToken);
+            console.log('logged in ', data);
+            router.push('/home');
+          })
+          .catch((err) => {
+            setMessage(err.message);
+            console.error(' failed to login ', err);
+          });
       }
     });
   };
@@ -116,11 +117,10 @@ export default function SignupForm() {
 
     cognitoUser.resendConfirmationCode((err, result) => {
       if (err) {
-        alert(err.message || JSON.stringify(err));
-        return;
+        setMessage(`Error: ${err.message || JSON.stringify(err)}`);
       } else {
         console.log('call result: ' + JSON.stringify(result));
-        setresendotp('otp sent succesfully');
+        setMessage('OTP sent successfully');
       }
     });
   };
@@ -264,7 +264,14 @@ export default function SignupForm() {
               We have sent you an email
             </h2>
           </div>
-
+          <div className="mb-2 mt-5 flex justify-center">
+            <Image
+              src={mail}
+              width={100}
+              height={100}
+              alt="Picture of the user"
+            />
+          </div>
           <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
             <form
               className="space-y-6"
@@ -282,6 +289,7 @@ export default function SignupForm() {
                     {formState.email}
                   </label>
                 </div>
+
                 <div className="mt-2">
                   <input
                     type="password"
@@ -292,15 +300,12 @@ export default function SignupForm() {
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                {resendotp && (
-                  <span className=" text-green-500">{resendotp}</span>
-                )}
-                {otperror && <span className="text-red-500">{otperror}</span>}
+                {message && <span className="text-red-500">{message}</span>}
               </div>
 
               <div>
                 <p className="mt-10 text-center text-sm text-gray-500">
-                 Didn&apos;t receive OTP???
+                  Didn&apos;t receive OTP???
                   <a
                     href="#"
                     onClick={handleResendOtp}
@@ -310,7 +315,6 @@ export default function SignupForm() {
                   </a>
                 </p>
 
-              
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

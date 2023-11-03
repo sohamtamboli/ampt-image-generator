@@ -19,8 +19,10 @@
     "amazon-cognito-identity-js": "^6.3.6",
     "cookie": "^0.5.0",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
     "js-cookie": "^3.0.5",
     "next": "^13.5.6",
+    "query-string": "^8.1.0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -42,7 +44,7 @@
   "ampt": {
     "app": "ampt-icon-generator",
     "runtime": "nodejs18",
-    "org": "sohamtamboli861135"
+    "org": "mohammedkhan"
   },
   "files": [
     "*"

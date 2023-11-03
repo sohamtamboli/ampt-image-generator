@@ -38,6 +38,7 @@ const Account: React.FC<AccountProps> = (props) => {
             reject();
           } else {
             resolve(session);
+            //
           }
         });
       } else {
