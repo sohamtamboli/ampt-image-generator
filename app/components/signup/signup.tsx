@@ -9,6 +9,7 @@ import Profile from '@/public/images/profile.svg';
 import mail from '@/public/images/mail.svg';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
+import '../../styles/loading.css';
 
 interface FormState {
   email: string;
@@ -17,6 +18,7 @@ interface FormState {
   username: string;
 }
 export default function SignupForm() {
+  const [Loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
   const [registered, setregistered] = useState(false);
   const [message, setMessage] = useState('');
@@ -45,6 +47,7 @@ export default function SignupForm() {
     } else {
       setErrors([]);
       event.preventDefault();
+      setLoading(true);
       const attributeList: CognitoUserAttribute[] = [
         new CognitoUserAttribute({
           Name: 'email',
@@ -65,10 +68,11 @@ export default function SignupForm() {
         (err, data) => {
           if (err) {
             console.log(err);
-
+            setLoading(false);
             setregistrationerror(err.message);
           } else {
             console.log(data);
+            setLoading(false);
             //user registerd succesfully
             setregistered(true);
             setregistrationerror('');
@@ -79,7 +83,7 @@ export default function SignupForm() {
   };
   const handleOtpSubmit = (event: FormEvent) => {
     event.preventDefault();
-
+    setLoading(true);
     const cognitoUser = new CognitoUser({
       Username: formState.email,
       Pool: UserPool,
@@ -89,6 +93,7 @@ export default function SignupForm() {
       if (err) {
         console.log(err);
         setMessage(err.message);
+        setLoading(false);
         // Handle error
       } else {
         console.log(result);
@@ -100,10 +105,12 @@ export default function SignupForm() {
             Cookies.set('jwtToken', jwtToken);
             console.log('logged in ', data);
             router.push('/home');
+            setLoading(false);
           })
           .catch((err) => {
             setMessage(err.message);
             console.error(' failed to login ', err);
+            setLoading(false);
           });
       }
     });
@@ -236,11 +243,20 @@ export default function SignupForm() {
                 </div>
               )}
               <div>
-                <button
+              <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                    Loading ? 'pointer-events-none opacity-70' : ''
+                  }`}
                 >
-                  Sign up
+                  {Loading && (
+                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
+                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                    </div>
+                  )}
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>
@@ -317,9 +333,18 @@ export default function SignupForm() {
 
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                    Loading ? 'pointer-events-none opacity-70' : ''
+                  }`}
                 >
-                  Sign in
+                  {Loading && (
+                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
+                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                    </div>
+                  )}
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>

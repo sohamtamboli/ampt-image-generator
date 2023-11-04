@@ -9,12 +9,14 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 import UserPool from '@/app/UserPool';
 import { useRouter } from 'next/navigation';
 import mail from '@/public/images/mail.svg';
+import '../../styles/loading.css';
 interface FormState {
   email: string;
   password: string;
 }
 
 export default function LoginForm() {
+  const [Loading, setLoading] = useState(false);
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
@@ -35,21 +37,25 @@ export default function LoginForm() {
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setLoading(true);
     authenticate(formState.email, formState.password)
       .then((data) => {
         const jwtToken = data.idToken.jwtToken;
         console.log('ID Token Data:', jwtToken);
         Cookies.set('jwtToken', jwtToken);
         console.log('logged in ', data);
+        setLoading(false);
       })
+
       .catch((err) => {
         console.error(' failed to login ', err);
         if (err.name === 'UserNotConfirmedException') {
           setshowconfirmuser(true);
-
+          setLoading(false);
           // Set the state variable to true if user is not confirmed
         } else {
           setshowconfirmuser(false);
+          setLoading(false);
         }
       });
   };
@@ -59,7 +65,7 @@ export default function LoginForm() {
   };
   const handleOtpSubmit = (event: FormEvent) => {
     event.preventDefault();
-
+    setLoading(true);
     const cognitoUser = new CognitoUser({
       Username: formState.email,
       Pool: UserPool,
@@ -69,6 +75,7 @@ export default function LoginForm() {
       if (err) {
         console.log(err);
         setMessage(err.message);
+        setLoading(false);
         // Handle error
       } else {
         console.log(result);
@@ -80,10 +87,12 @@ export default function LoginForm() {
             Cookies.set('jwtToken', jwtToken);
             console.log('logged in ', data);
             router.push('/home');
+            setLoading(false);
           })
           .catch((err) => {
             setMessage(err.message);
             console.error(' failed to login ', err);
+            setLoading(false);
           });
       }
     });
@@ -192,9 +201,18 @@ export default function LoginForm() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                    Loading ? 'pointer-events-none opacity-70' : ''
+                  }`}
                 >
-                  Sign in
+                  {Loading && (
+                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
+                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                    </div>
+                  )}
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>
@@ -269,11 +287,26 @@ export default function LoginForm() {
                   </a>
                 </p>
 
-                <button
+                {/* <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign in
+                </button> */}
+                <button
+                  type="submit"
+                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                    Loading ? 'pointer-events-none opacity-70' : ''
+                  }`}
+                >
+                  {Loading && (
+                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
+                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                    </div>
+                  )}
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>

@@ -1,0 +1,23 @@
+@keyframes bounce {
+    0%, 100% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  
+  .bounce-delay-1 {
+    animation: bounce 1s infinite 0.5s;
+  }
+  
+  .bounce-delay-2 {
+    animation: bounce 1s infinite 1s;
+  }
+  
+  .bounce-delay-3 {
+    animation: bounce 1s infinite 1.5s;
+  }
+  .bounce-delay-4 {
+    animation: bounce 1s infinite 2s;
+  }
