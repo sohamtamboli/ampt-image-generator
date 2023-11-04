@@ -15,11 +15,12 @@ const Navbar: React.FC = () => {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <>
-        <div className=" justify-end sm:px-6 lg:px-8">
-          <div className=" flex h-16 justify-end ">
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className=" ml-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className=" relative flex h-16 items-center justify-between ">
+            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"></div>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0   ">
               {pathname === '/favourites' && (
-                <div className="mr-2">
+                <div className="mr-2 ">
                   <Link href="/home">
                     <button
                       type="button"
@@ -28,6 +29,7 @@ const Navbar: React.FC = () => {
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Home</span>
                       <Image
+                        aria-hidden="true"
                         src="/images/home.svg" // Update the image source to your home icon
                         alt="home"
                         height={33}
@@ -63,7 +65,7 @@ const Navbar: React.FC = () => {
                       src="/images/navprofile.svg"
                       alt="fav"
                       height={40}
-                      width={35}
+                      width={40}
                     />
                   </Menu.Button>
                 </div>

@@ -5,15 +5,10 @@ import ImageGrid from '../components/imagegrid/imagegrid';
 
 const HomePage = () => {
   return (
-    <div className="">
-      <Layout>
-        <div className='ml-2'>
-          <PromtBar />
-        </div>
-
-        <ImageGrid />
-      </Layout>
-    </div>
+    <Layout>
+      <PromtBar />
+      <ImageGrid />
+    </Layout>
   );
 };
 

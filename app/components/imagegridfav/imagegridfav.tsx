@@ -1,6 +1,9 @@
 'use client';
+
+import DeleteIcon from "@/public/images/delete.svg";
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+
 interface Photo {
   id: Number;
   url: string;
@@ -24,16 +27,25 @@ const ImageGridFav: React.FC = () => {
 
   return (
     <div className="mt-4">
-      <div className=" grid grid-cols-4 gap-4">
+      <div className=" grid grid-cols-8 gap-4">
         {photos.map((photo) => (
-          <div key={photo.id.toString()} className=" rounded-lg shadow-lg">
+          <div key={photo.id.toString()} className="relative group rounded-lg shadow-lg overflow-hidden"
+          >
             <Image
               src={photo.url}
               alt={photo.id.toString()}
-              className="h-auto w-full"
-              height={10}
-              width={10}
+              className="h-auto w-full transform scale-100 transition-transform duration-300 group-hover:scale-110"
+              height="10"
+              width="10"
             />
+            {/* extra added  */}
+            <button className="absolute bottom-2 right-2 text-white p-1 rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100 "
+            style={{ width: '40px', height: '40px' }}> <Image
+              src={DeleteIcon}
+              alt={photo.id.toString()}
+              className="h-auto w-full transform scale-100 transition-transform duration-300 group-hover:scale-110"
+             
+            /> </button>
           </div>
         ))}
       </div>
