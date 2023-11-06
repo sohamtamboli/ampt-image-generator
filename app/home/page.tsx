@@ -22,13 +22,23 @@ const AutoResizeTextarea: React.FC<AutoResizeTextareaProps> = ({
   };
 
   return (
-    <Textarea
-      className="rounded-3xl border-blue-500 bg-gray-200 p-5 pl-10 text-base text-black shadow-lg shadow-gray-200 ring-blue-500 focus:border-blue-500 focus:ring-blue-500"
-      placeholder="Type your prompt here we will generate image for you."
-      id="default-search"
-      value={value}
-      onChange={handleInputChange}
-    />
+    // <Textarea
+    //   className="rounded-3xl border-blue-500 bg-gray-200 p-5 pl-10 text-base text-black shadow-lg shadow-gray-200 ring-blue-500 focus:border-blue-500 focus:ring-blue-500"
+    //   placeholder="Type your prompt here we will generate image for you."
+    //   id="default-search"
+    //   value={value}
+    //   onChange={handleInputChange}
+    // />
+    <>
+      <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"></label>
+      <textarea
+        id="message"
+        value={value}
+        onChange={handleInputChange}
+        className="block w-full rounded-2xl border border-blue-500 bg-gray-200 p-2.5 text-base text-black shadow-lg shadow-gray-200 ring-blue-500 focus:border-blue-500 focus:ring-blue-500"
+        placeholder="Write your thoughts here..."
+      ></textarea>
+    </>
   );
 };
 
@@ -47,9 +57,9 @@ const HomePage: React.FC = () => {
           <div className="mb-4 w-2/4">
             <AutoResizeTextarea value={query} onChange={setQuery} />
           </div>
-          <Button type="submit" className="w-48 rounded-3xl max-sm:w-28">
+          {/* <Button type="submit" className="w-48 rounded-3xl max-sm:w-28">
             Generate
-          </Button>
+          </Button> */}
         </div>
       </form>
       <ImageGrid />
