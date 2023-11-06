@@ -31,6 +31,7 @@ export default function SignupForm() {
   const router = useRouter();
   const { authenticate } = useContext(AccountContext); // added new
 
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormState((prevState) => ({
