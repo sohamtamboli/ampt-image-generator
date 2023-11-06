@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@ampt/cli": "^1.0.14",
-    "@ampt/data": "^1.0.8",
-    "@ampt/nextjs": "^2.0.11",
-    "@ampt/sdk": "^1.0.5",
+    "@ampt/data": "^1.0.10",
+    "@ampt/nextjs": "^2.0.13",
+    "@ampt/sdk": "^1.0.7",
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.0.2",
