@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState, FormEvent, ChangeEvent, useContext } from 'react';
+import { useState, FormEvent, ChangeEvent, useContext ,useEffect} from 'react';
 import Image from 'next/image';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
@@ -15,6 +15,7 @@ interface FormState {
 }
 
 export default function LoginForm() {
+
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
@@ -24,7 +25,9 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-  const { authenticate, error } = useContext(AccountContext);
+  const { authenticate, error} = useContext(AccountContext);
+
+
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -37,10 +40,12 @@ export default function LoginForm() {
     event.preventDefault();
     authenticate(formState.email, formState.password)
       .then((data) => {
-        const jwtToken = data.idToken.jwtToken;
+        const jwtToken = data.accessToken.jwtToken;
+      
         console.log('ID Token Data:', jwtToken);
         Cookies.set('jwtToken', jwtToken);
-        console.log('logged in ', data);
+       
+       
       })
       .catch((err) => {
         console.error(' failed to login ', err);
