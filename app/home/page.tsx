@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import Layout from '../components/layout';
 import ImageGrid from '../components/imagegrid/imagegrid';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
 
 interface AutoResizeTextareaProps {
   value: string;
@@ -22,13 +20,6 @@ const AutoResizeTextarea: React.FC<AutoResizeTextareaProps> = ({
   };
 
   return (
-    // <Textarea
-    //   className="rounded-3xl border-blue-500 bg-gray-200 p-5 pl-10 text-base text-black shadow-lg shadow-gray-200 ring-blue-500 focus:border-blue-500 focus:ring-blue-500"
-    //   placeholder="Type your prompt here we will generate image for you."
-    //   id="default-search"
-    //   value={value}
-    //   onChange={handleInputChange}
-    // />
     <>
       <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"></label>
       <textarea
@@ -51,15 +42,18 @@ const HomePage: React.FC = () => {
   };
   return (
     <Layout>
-      {/* <PromtBar /> */}
       <form onSubmit={handleSubmit}>
         <div className="mt-16 flex flex-col items-center">
           <div className="mb-4 w-2/4">
             <AutoResizeTextarea value={query} onChange={setQuery} />
           </div>
-          {/* <Button type="submit" className="w-48 rounded-3xl max-sm:w-28">
+
+          <button
+            type="submit"
+            className=" mb-2 mr-2 w-48 rounded-3xl bg-gray-800  px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 max-sm:w-28"
+          >
             Generate
-          </Button> */}
+          </button>
         </div>
       </form>
       <ImageGrid />
