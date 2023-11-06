@@ -10,14 +10,14 @@ const verifier = CognitoJwtVerifier.create({
   clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
 });
 export async   function  middleware(req: NextRequest) {
-  console.log('middleware running');
+  console.log('middleware start -----------------------------------------------------------clear');
   // Check if the user is authenticated
 console.log({ userPoolId: process.env.NEXT_PUBLIC_USERPOOL_ID as string,
   tokenUse: "access",
   clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,})
   const cookieStore = cookies();
   const hasCookie = cookieStore.get('jwtToken');
-  console.log(hasCookie)
+  // console.log(hasCookie)
 let isAuthenticated = false;
   if(hasCookie) {
     try {
@@ -31,7 +31,7 @@ let isAuthenticated = false;
     }
   }
 // User is authenticated if the jwtToken cookie exists
-
+  console.log('middleware stop ----------------------------------------------------------');
   if (
     !isAuthenticated &&
     !['/login', '/signup'].includes(req.nextUrl.pathname)
