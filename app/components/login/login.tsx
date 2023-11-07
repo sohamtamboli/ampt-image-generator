@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import { AccountContext } from '../context/accountcontext';
+import Spinner from '../SVGs/Spinner';
 interface FormState {
   email: string;
   password: string;
@@ -25,9 +26,7 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-  const { authenticate, error} = useContext(AccountContext);
-
-
+  const { authenticate, error } = useContext(AccountContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,7 +42,7 @@ export default function LoginForm() {
       .then((data) => {
         const jwtToken = data.idToken.jwtToken;
         const accessJwt = data?.accessToken?.jwtToken;
-        console.log('ID Token Data:', jwtToken);
+        // console.log('ID Token Data:', jwtToken);
         Cookies.set('jwtToken', jwtToken);
         Cookies.set('accessTokenJwt', accessJwt);
         localStorage.setItem('jwt', accessJwt);
@@ -205,18 +204,15 @@ export default function LoginForm() {
               <div>
                 <button
                   type="submit"
-                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
-                    Loading ? 'pointer-events-none opacity-70' : ''
-                  }`}
+                  className={`relative mt-2 flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 
+                  `}
                 >
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
-                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
+                    <div>
+                      <Spinner />
                     </div>
                   )}
-                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>
@@ -293,18 +289,14 @@ export default function LoginForm() {
 
                 <button
                   type="submit"
-                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
-                    Loading ? 'pointer-events-none opacity-70' : ''
-                  }`}
+                  className={`relative flex w-full justify-center rounded-md gap-2 bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
-                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
+                    <div>
+                      <Spinner />
                     </div>
                   )}
-                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>

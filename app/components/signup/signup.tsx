@@ -9,6 +9,7 @@ import Profile from '@/public/images/profile.svg';
 import mail from '@/public/images/mail.svg';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
+import Spinner from '../SVGs/Spinner';
 
 interface FormState {
   email: string;
@@ -31,7 +32,6 @@ export default function SignupForm() {
   });
   const router = useRouter();
   const { authenticate } = useContext(AccountContext); // added new
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -243,20 +243,16 @@ export default function SignupForm() {
                 </div>
               )}
               <div>
-              <button
+                <button
                   type="submit"
-                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
-                    Loading ? 'pointer-events-none opacity-70' : ''
-                  }`}
+                  className={`relative flex w-full gap-2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
-                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
+                    <div>
+                      <Spinner />
                     </div>
                   )}
-                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>
@@ -333,18 +329,14 @@ export default function SignupForm() {
 
                 <button
                   type="submit"
-                  className={`relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
-                    Loading ? 'pointer-events-none opacity-70' : ''
-                  }`}
+                  className={`focus-visible:outline-indigo-6 gap-2  relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
                 >
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
-                    <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
+                    <div>
+                      <Spinner />
                     </div>
                   )}
-                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                 </button>
               </div>
             </form>
