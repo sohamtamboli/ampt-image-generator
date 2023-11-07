@@ -9,7 +9,6 @@ import Profile from '@/public/images/profile.svg';
 import mail from '@/public/images/mail.svg';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
-import '../../styles/loading.css';
 
 interface FormState {
   email: string;
@@ -251,9 +250,9 @@ export default function SignupForm() {
                 >
                   {Loading && (
                     <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
                       <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
                     </div>
                   )}
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
@@ -339,9 +338,9 @@ export default function SignupForm() {
                 >
                   {Loading && (
                     <div className="absolute inset-0 ml-28 mt-2 flex items-center justify-center">
-                      <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      {/* <div className="bounce-delay-1 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
                       <div className="bounce-delay-2 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
-                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div>
+                      <div className="bounce-delay-3 mr-2 h-1 w-1 animate-bounce rounded-full bg-white"></div> */}
                     </div>
                   )}
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
