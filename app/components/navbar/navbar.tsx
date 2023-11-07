@@ -1,9 +1,12 @@
 'use client';
+import AccIcon from '@/public/images/accounticon.webp';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
+import BookmarkIcon from '../SVGs/BookmarkIcon';
+import HomeIcon from '../SVGs/HomeIcon';
 import { AccountContext } from '../context/accountcontext';
 
 function classNames(...classes: (false | null | undefined | string)[]) {
@@ -39,16 +42,11 @@ const Navbar: React.FC = () => {
                   <Link href="/home">
                     <button
                       type="button"
-                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="relative rounded-full focus:outline-none"
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Home</span>
-                      <Image
-                        src="/images/home.svg" // Update the image source to your home icon
-                        alt="home"
-                        height={33}
-                        width={33}
-                      />
+                      <HomeIcon />
                     </button>
                   </Link>
                 </div>
@@ -60,20 +58,21 @@ const Navbar: React.FC = () => {
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View favourites</span>
-                  Bookmarks
+                  <BookmarkIcon />
                 </button>
               </Link>
 
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
                 <div>
-                  <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <Menu.Button className="relative flex rounded-full border-2 border-gray-950 bg-gray-800 text-sm focus:outline-none">
                     <span className="absolute -inset-1.5" />
                     <Image
-                      src="/images/navprofile.svg"
+                      src={AccIcon}
                       alt="fav"
                       height={40}
                       width={35}
+                      className="rounded-full"
                     />
                   </Menu.Button>
                 </div>

@@ -53,7 +53,7 @@ const HomePage = () => {
       console.log(error, 'errorr');
       // console.log(err, 'err');
       enqueueSnackbar({
-        message: 'Something went wrong!',
+        message: 'Something went wrong! Please try logging in again!',
         variant: 'error',
       });
     },

@@ -35,7 +35,10 @@ const GeneratedImage = ({
   const [bookmarkSuccess, setBookmarkSuccess] = useState(false);
 
   useEffect(() => {
-    isLoading && setBookmarkSuccess(false);
+    if (isLoading) {
+      setBookmarkSuccess(false);
+      setDisableBtn(false);
+    }
   }, [isLoading]);
 
   const bookmarkImage = useMutation({
@@ -54,7 +57,7 @@ const GeneratedImage = ({
     },
     onError: () => {
       enqueueSnackbar({
-        message: 'Something went wrong!',
+        message: 'Something went wrong! Please try logging in again!',
         variant: 'error',
       });
     },
@@ -102,7 +105,7 @@ const GeneratedImage = ({
                   </h3>
                   <button
                     type="button"
-                    disabled={disableBtn}
+                    disabled={disableBtn || bookmarkImage.isPending}
                     onClick={handleBookmarkImage}
                     className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-700 px-3 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-700"
                   >

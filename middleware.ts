@@ -26,20 +26,6 @@ export function middleware(req: NextRequest) {
     // redirect them to the home page
     return NextResponse.redirect(new URL('/home', req.url));
   }
-
-  // const user = Pool.getCurrentUser();
-  // if (user) {
-  //   user.getSession((err: any, session: CognitoUserSession) => {
-  //     if (err) {
-  //       console.log(err, 'error cognito');
-  //       // reject();
-  //     } else {
-  //       // resolve(session);
-  //     }
-  //   });
-  // } else {
-  //   // reject();
-  // }
 }
 
 export const config = {
