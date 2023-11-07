@@ -1,13 +1,13 @@
 'use client';
-import React, { createContext, useState } from 'react';
+import Pool from '@/app/UserPool';
 import {
-  CognitoUser,
   AuthenticationDetails,
+  CognitoUser,
   CognitoUserSession,
 } from 'amazon-cognito-identity-js';
-import Pool from '@/app/UserPool';
-import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import React, { createContext, useState } from 'react';
 
 interface IContext {
   authenticate: (Username: string, Password: string) => Promise<any>;
@@ -80,7 +80,8 @@ const Account: React.FC<AccountProps> = (props) => {
   const Logout = () => {
     const user = Pool.getCurrentUser();
     if (user) {
-      Cookies.remove('jwtToken')
+      Cookies.remove('jwtToken');
+      localStorage.removeItem('jwt');
       user.signOut();
     }
   };
