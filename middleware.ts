@@ -1,5 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import Pool from '@/app/UserPool';
+import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+
+export function middleware(req: NextRequest) {
+  console.log('middleware running');
+  // Check if the user is authenticated
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 
 

@@ -7,7 +7,9 @@ const nextConfig = {
     ],
   },
   middleware: './middleware.ts', // Path to your middleware file
-
+  publicRuntimeConfig: {
+    base_url: process.env.NEXT_PUBLIC_BASE_URL,
+  },
 };
 
 module.exports = nextConfig;

@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from '../components/layout';
 import ImageGridFav from '../components/imagegridfav/imagegridfav';
+import Layout from '../components/layout';
 
-const Favourites: React.FC  = () => {
+const Favourites: React.FC = () => {
   return (
     <div>
       <Layout>
-        <div>
+        <div className="p-2 sm:p-6 md:p-8">
           <ImageGridFav />
         </div>
       </Layout>
