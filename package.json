@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ampt/cli": "^1.0.15",
+    "@ampt/cli": "^1.0.16",
     "@ampt/data": "^1.0.10",
     "@ampt/nextjs": "^2.0.13",
     "@ampt/sdk": "^1.0.7",
