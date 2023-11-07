@@ -9,13 +9,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import { AccountContext } from '../context/accountcontext';
+import Spinner from '../SVGs/Spinner';
 interface FormState {
   email: string;
   password: string;
 }
 
 export default function LoginForm() {
-
+  const [Loading, setLoading] = useState(false);
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
@@ -25,9 +26,7 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-  const { authenticate, error} = useContext(AccountContext);
-
-
+  const { authenticate, error } = useContext(AccountContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -38,24 +37,28 @@ export default function LoginForm() {
   };
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setLoading(true);
     authenticate(formState.email, formState.password)
       .then((data) => {
         const jwtToken = data.idToken.jwtToken;
         const accessJwt = data?.accessToken?.jwtToken;
-        console.log('ID Token Data:', jwtToken);
+        // console.log('ID Token Data:', jwtToken);
         Cookies.set('jwtToken', jwtToken);
         Cookies.set('accessTokenJwt', accessJwt);
         localStorage.setItem('jwt', accessJwt);
         console.log('logged in ', data);
+        setLoading(false);
       })
+
       .catch((err) => {
         console.error(' failed to login ', err);
         if (err.name === 'UserNotConfirmedException') {
           setshowconfirmuser(true);
-
+          setLoading(false);
           // Set the state variable to true if user is not confirmed
         } else {
           setshowconfirmuser(false);
+          setLoading(false);
         }
       });
   };
@@ -65,7 +68,7 @@ export default function LoginForm() {
   };
   const handleOtpSubmit = (event: FormEvent) => {
     event.preventDefault();
-
+    setLoading(true);
     const cognitoUser = new CognitoUser({
       Username: formState.email,
       Pool: UserPool,
@@ -75,6 +78,7 @@ export default function LoginForm() {
       if (err) {
         console.log(err);
         setMessage(err.message);
+        setLoading(false);
         // Handle error
       } else {
         console.log(result);
@@ -86,10 +90,12 @@ export default function LoginForm() {
             Cookies.set('jwtToken', jwtToken);
             console.log('logged in ', data);
             router.push('/home');
+            setLoading(false);
           })
           .catch((err) => {
             setMessage(err.message);
             console.error(' failed to login ', err);
+            setLoading(false);
           });
       }
     });
@@ -198,9 +204,15 @@ export default function LoginForm() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative mt-2 flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 
+                  `}
                 >
-                  Sign in
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
+                  {Loading && (
+                    <div>
+                      <Spinner />
+                    </div>
+                  )}
                 </button>
               </div>
             </form>
@@ -277,9 +289,14 @@ export default function LoginForm() {
 
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative flex w-full justify-center rounded-md gap-2 bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
-                  Sign in
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
+                  {Loading && (
+                    <div>
+                      <Spinner />
+                    </div>
+                  )}
                 </button>
               </div>
             </form>

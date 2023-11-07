@@ -9,6 +9,7 @@ import Profile from '@/public/images/profile.svg';
 import mail from '@/public/images/mail.svg';
 import { AccountContext } from '../context/accountcontext';
 import Cookies from 'js-cookie';
+import Spinner from '../SVGs/Spinner';
 
 interface FormState {
   email: string;
@@ -17,6 +18,7 @@ interface FormState {
   username: string;
 }
 export default function SignupForm() {
+  const [Loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
   const [registered, setregistered] = useState(false);
   const [message, setMessage] = useState('');
@@ -30,7 +32,6 @@ export default function SignupForm() {
   });
   const router = useRouter();
   const { authenticate } = useContext(AccountContext); // added new
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -46,6 +47,7 @@ export default function SignupForm() {
     } else {
       setErrors([]);
       event.preventDefault();
+      setLoading(true);
       const attributeList: CognitoUserAttribute[] = [
         new CognitoUserAttribute({
           Name: 'email',
@@ -66,10 +68,11 @@ export default function SignupForm() {
         (err, data) => {
           if (err) {
             console.log(err);
-
+            setLoading(false);
             setregistrationerror(err.message);
           } else {
             console.log(data);
+            setLoading(false);
             //user registerd succesfully
             setregistered(true);
             setregistrationerror('');
@@ -80,7 +83,7 @@ export default function SignupForm() {
   };
   const handleOtpSubmit = (event: FormEvent) => {
     event.preventDefault();
-
+    setLoading(true);
     const cognitoUser = new CognitoUser({
       Username: formState.email,
       Pool: UserPool,
@@ -90,6 +93,7 @@ export default function SignupForm() {
       if (err) {
         console.log(err);
         setMessage(err.message);
+        setLoading(false);
         // Handle error
       } else {
         console.log(result);
@@ -101,10 +105,12 @@ export default function SignupForm() {
             Cookies.set('jwtToken', jwtToken);
             console.log('logged in ', data);
             router.push('/home');
+            setLoading(false);
           })
           .catch((err) => {
             setMessage(err.message);
             console.error(' failed to login ', err);
+            setLoading(false);
           });
       }
     });
@@ -239,9 +245,14 @@ export default function SignupForm() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`relative flex w-full gap-2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
-                  Sign up
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
+                  {Loading && (
+                    <div>
+                      <Spinner />
+                    </div>
+                  )}
                 </button>
               </div>
             </form>
@@ -318,9 +329,14 @@ export default function SignupForm() {
 
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={`focus-visible:outline-indigo-6 gap-2  relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
                 >
-                  Sign in
+                  <span>{Loading ? 'Signing in' : 'Sign in'}</span>
+                  {Loading && (
+                    <div>
+                      <Spinner />
+                    </div>
+                  )}
                 </button>
               </div>
             </form>
