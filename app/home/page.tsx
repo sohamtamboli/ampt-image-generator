@@ -5,7 +5,6 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import Axios from '../axiosConfig';
 import GeneratedImage from '../components/GeneratedImage/GeneratedImage';
-import PulseLoader from '../components/PulseLoader/PulseLoader';
 import ImageGrid from '../components/imagegrid/imagegrid';
 import Layout from '../components/layout';
 import PromptBar from '../components/promtbar/promtbar';

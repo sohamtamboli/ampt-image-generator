@@ -15,6 +15,7 @@ interface FormState {
 }
 
 export default function LoginForm() {
+
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
@@ -24,7 +25,9 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-  const { authenticate, error } = useContext(AccountContext);
+  const { authenticate, error} = useContext(AccountContext);
+
+
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
