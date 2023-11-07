@@ -1,19 +1,20 @@
 'use client';
-import React, { createContext, useState } from 'react';
+import Pool from '@/app/UserPool';
 import {
-  CognitoUser,
   AuthenticationDetails,
+  CognitoUser,
   CognitoUserSession,
 } from 'amazon-cognito-identity-js';
-import Pool from '@/app/UserPool';
-import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import React, { createContext, useState } from 'react';
 
 interface IContext {
   authenticate: (Username: string, Password: string) => Promise<any>;
   getSession: () => Promise<any>;
   Logout: () => void;
   error: string;
+  
 }
 interface AccountProps {
   children?: React.ReactNode;
@@ -24,10 +25,12 @@ const AccountContext = createContext<IContext>({
   getSession: () => Promise.resolve(),
   Logout: () => {},
   error: '',
+  
 });
 const Account: React.FC<AccountProps> = (props) => {
   const router = useRouter();
   const [error, setError] = useState<string>('');
+
 
   const getSession = async () => {
     return await new Promise((resolve, reject) => {
@@ -38,6 +41,7 @@ const Account: React.FC<AccountProps> = (props) => {
             reject();
           } else {
             resolve(session);
+           
             //
           }
         });
@@ -80,7 +84,8 @@ const Account: React.FC<AccountProps> = (props) => {
   const Logout = () => {
     const user = Pool.getCurrentUser();
     if (user) {
-      Cookies.remove('jwtToken')
+      Cookies.remove('jwtToken');
+      localStorage.removeItem('jwt');
       user.signOut();
     }
   };

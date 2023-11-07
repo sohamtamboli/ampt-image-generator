@@ -1,23 +1,17 @@
-import React from 'react'
-import Link from 'next/link'
+import Link from 'next/link';
+import React from 'react';
+
 const Footer = () => {
   return (
-    <div className="footer flex min-h-full flex-col flex-shrink-0">
-      <div className="mt-10 ">
-        <footer className="bg-gray-800 text-center lg:text-left">
-          <div className="p-4 text-center text-neutral-200">
-            © 2023 Copyright:
-            <Link
-              href="https://ampt.dev/"
-              className="text-neutral-400"
-            >
-              {''} AMPT-POC-ICON-GENERATOR
-            </Link>
-          </div>
-        </footer>
+    <footer className="footer mt-10 text-sm">
+      <div className="justify-left flex flex-col items-center gap-1 p-2 text-neutral-900 sm:flex-row sm:gap-2">
+        <span className="text-neutral-900">© {new Date().getFullYear()} </span>
+        <Link href="https://ampt.dev/" className="text-neutral-400">
+          AMPT-POC-IMAGE-GENERATOR
+        </Link>
       </div>
-    </div>
-  )
-}
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

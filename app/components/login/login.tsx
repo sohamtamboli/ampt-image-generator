@@ -1,15 +1,14 @@
 'use client';
-import Link from 'next/link';
-import { useState, FormEvent, ChangeEvent, useContext } from 'react';
-import Image from 'next/image';
-import { AccountContext } from '../context/accountcontext';
-import Cookies from 'js-cookie';
+import UserPool from '@/app/UserPool';
+import mail from '@/public/images/mail.svg';
 import Profile from '@/public/images/profile.svg';
 import { CognitoUser } from 'amazon-cognito-identity-js';
-import UserPool from '@/app/UserPool';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import mail from '@/public/images/mail.svg';
-
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { AccountContext } from '../context/accountcontext';
 interface FormState {
   email: string;
   password: string;
@@ -26,7 +25,9 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
-  const { authenticate, error } = useContext(AccountContext);
+  const { authenticate, error} = useContext(AccountContext);
+
+
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -41,8 +42,11 @@ export default function LoginForm() {
     authenticate(formState.email, formState.password)
       .then((data) => {
         const jwtToken = data.idToken.jwtToken;
+        const accessJwt = data?.accessToken?.jwtToken;
         console.log('ID Token Data:', jwtToken);
         Cookies.set('jwtToken', jwtToken);
+        Cookies.set('accessTokenJwt', accessJwt);
+        localStorage.setItem('jwt', accessJwt);
         console.log('logged in ', data);
         setLoading(false);
       })
