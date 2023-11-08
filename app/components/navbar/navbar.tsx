@@ -1,5 +1,5 @@
 'use client';
-import AccIcon from '@/public/images/accounticon.webp';
+import AccIcon from '@/public/images/accounticon.svg';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
