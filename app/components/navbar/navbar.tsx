@@ -34,9 +34,9 @@ const Navbar: React.FC = () => {
   return (
     <Disclosure as="nav" className="">
       <>
-        <div className=" justify-end sm:px-6 lg:px-8">
-          <div className=" flex h-16 justify-end ">
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className=" ">
+          <div className="  ">
+            <div className="mx-4 my-2 flex items-center justify-end">
               {pathname === '/favourites' && (
                 <div className="mr-2">
                   <Link href="/home">
@@ -44,7 +44,6 @@ const Navbar: React.FC = () => {
                       type="button"
                       className="relative rounded-full focus:outline-none"
                     >
-                      <span className="absolute -inset-1.5" />
                       <span className="sr-only">Home</span>
                       <HomeIcon />
                     </button>
@@ -56,7 +55,6 @@ const Navbar: React.FC = () => {
                   type="button"
                   className="relative rounded-full p-1 text-gray-950 hover:text-black focus:outline-none"
                 >
-                  <span className="absolute -inset-1.5" />
                   <span className="sr-only">View favourites</span>
                   <BookmarkIcon />
                 </button>
@@ -66,11 +64,10 @@ const Navbar: React.FC = () => {
               <Menu as="div" className="relative ml-3">
                 <div>
                   <Menu.Button className="relative flex rounded-full border-2 border-gray-950 bg-gray-800 text-sm focus:outline-none">
-                    <span className="absolute -inset-1.5" />
                     <Image
                       src={AccIcon}
                       alt="fav"
-                      height={40}
+                      height={35}
                       width={35}
                       className="rounded-full"
                     />
@@ -88,7 +85,7 @@ const Navbar: React.FC = () => {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
-                        <Link legacyBehavior href="/favourites">
+                        <Link legacyBehavior href={''}>
                           <a
                             className={classNames(
                               active ? 'bg-gray-100' : '',

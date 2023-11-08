@@ -80,7 +80,7 @@ const GeneratedImage = ({
 
   return (
     <>
-      <div className="mx-auto grid w-[380px] place-items-center rounded-lg border-2 border-solid border-gray-50 bg-gray-50 p-4 sm:w-[460px] md:w-[800px]">
+      <div className="mx-1 grid place-items-center rounded-lg border-2 border-solid  border-gray-50 bg-gray-50 p-4 sm:mx-auto sm:w-[80%] md:mx-auto md:w-[90%] ">
         {isLoading ? (
           <PulseLoader />
         ) : (
@@ -101,7 +101,7 @@ const GeneratedImage = ({
                   <h3>
                     <b>Prompt:</b>
                     <br />
-                    {prompt ?? 'not found'}
+                    <span>{prompt ?? 'not found'}</span>
                   </h3>
                   <button
                     type="button"
