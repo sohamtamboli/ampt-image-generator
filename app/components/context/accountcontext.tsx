@@ -14,7 +14,6 @@ interface IContext {
   getSession: () => Promise<any>;
   Logout: () => void;
   error: string;
-  
 }
 interface AccountProps {
   children?: React.ReactNode;
@@ -25,12 +24,10 @@ const AccountContext = createContext<IContext>({
   getSession: () => Promise.resolve(),
   Logout: () => {},
   error: '',
-  
 });
 const Account: React.FC<AccountProps> = (props) => {
   const router = useRouter();
   const [error, setError] = useState<string>('');
-
 
   const getSession = async () => {
     return await new Promise((resolve, reject) => {
@@ -41,7 +38,7 @@ const Account: React.FC<AccountProps> = (props) => {
             reject();
           } else {
             resolve(session);
-           
+
             //
           }
         });
@@ -85,6 +82,7 @@ const Account: React.FC<AccountProps> = (props) => {
     const user = Pool.getCurrentUser();
     if (user) {
       Cookies.remove('jwtToken');
+      Cookies.remove('accessTokenJwt');
       localStorage.removeItem('jwt');
       user.signOut();
     }
