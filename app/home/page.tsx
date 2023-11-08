@@ -5,6 +5,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import Axios from '../axiosConfig';
 import GeneratedImage from '../components/GeneratedImage/GeneratedImage';
+import PromptCard from '../components/PromptCard/PromptCard';
 import ImageGrid from '../components/imagegrid/imagegrid';
 import Layout from '../components/layout';
 import PromptBar from '../components/promtbar/promtbar';
@@ -25,7 +26,9 @@ const HomePage = () => {
   const [query, setQuery] = useState('');
   const [showImgGrid, setShowImgGrid] = useState(false);
   const [savedPrompt, setSavedPrompt] = useState('');
-
+ const handlePromptClick = (clickedPrompt:string) => {
+   setQuery(clickedPrompt);
+ };
   const {
     mutate,
     data: hookData,
@@ -82,24 +85,31 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <div className="my-14">
-        <PromptBar
-          handleSubmit={handleSubmit}
-          query={query}
-          setQuery={setQuery}
-          isLoading={isPending}
-        />
-      </div>
-      <div className="">
-        {showImgGrid ? (
-          <ImageGrid />
-        ) : (
-          <GeneratedImage
-            isLoading={isPending}
-            imageData={hookData?.data}
-            prompt={savedPrompt}
-          />
-        )}
+      <div className="my-10 flex flex-col gap-3 md:flex-row md:gap-6">
+        <div className="md:flex-[0.65]">
+          <div className="mb-10">
+            <PromptBar
+              handleSubmit={handleSubmit}
+              query={query}
+              setQuery={setQuery}
+              isLoading={isPending}
+            />
+          </div>
+          <div className="">
+            {showImgGrid ? (
+              <ImageGrid />
+            ) : (
+              <GeneratedImage
+                isLoading={isPending}
+                imageData={hookData?.data}
+                prompt={savedPrompt}
+              />
+            )}
+          </div>
+        </div>
+        <div className="flex h-fit justify-center md:flex-[0.35]">
+          <PromptCard onPromptClick={handlePromptClick} />
+        </div>
       </div>
     </Layout>
   );

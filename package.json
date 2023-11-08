@@ -50,7 +50,7 @@
   "ampt": {
     "app": "ampt-icon-generator",
     "runtime": "nodejs18",
-    "org": "sohamtamboli861135"
+    "org": "mohammedkhan"
   },
   "files": [
     "*"

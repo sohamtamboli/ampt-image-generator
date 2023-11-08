@@ -7,6 +7,6 @@ body {
   color: #000;
 }
 
-
-
-
+.prompt__card::-webkit-scrollbar {
+  width: 2px;
+}
