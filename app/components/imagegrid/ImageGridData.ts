@@ -1,13 +1,12 @@
-import ancienttemple from '@/public/images/ancienttemple.webp';
-import floatingisland from '@/public/images/floatingisland.webp';
-import futurelab from '@/public/images/futurelab.webp';
-import oasis from '@/public/images/oasis.webp';
-import oldlibrary from '@/public/images/oldlibrary.webp';
-// import space from '@/public/images/space.webp';
+import ancienttemple from '@/public/images/ancienttemple.svg';
+import floatingisland from '@/public/images/floatingisland.svg';
+import futurelab from '@/public/images/futurelab.svg';
+import oasis from '@/public/images/oasis.svg';
+import oldlibrary from '@/public/images/oldlibrary.svg';
 import space from '@/public/images/space.svg';
-import timemachine from '@/public/images/timemachine.webp';
-import treehouse from '@/public/images/treehouse.webp';
-import vikingship from '@/public/images/vikingship.webp';
+import timemachine from '@/public/images/timemachine.svg';
+import treehouse from '@/public/images/treehouse.svg';
+import vikingship from '@/public/images/vikingship.svg';
 
 export const DemoImages = [
   space,
