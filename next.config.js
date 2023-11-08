@@ -4,7 +4,9 @@ const nextConfig = {
     domains: [
       'api.slingacademy.com',
       'app-storagebucket-ta5krb222iam.s3.us-east-1.amazonaws.com',
+      '	https://stylish-mvp-ad9l9.ampt.app',
     ],
+    formats: ['image/webp'],
   },
   middleware: './middleware.ts', // Path to your middleware file
   publicRuntimeConfig: {
