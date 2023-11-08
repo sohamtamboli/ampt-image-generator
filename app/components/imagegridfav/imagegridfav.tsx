@@ -25,6 +25,7 @@ const ImageGridFav: React.FC = () => {
       const res = await Axios.get('/api/bookmark/image');
       return res.data;
     },
+    enabled: true,
   });
 
   useEffect(() => {

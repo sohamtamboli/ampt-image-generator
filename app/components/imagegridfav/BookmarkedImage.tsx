@@ -51,6 +51,7 @@ const BookmarkedImage = ({ photo }: BookmarkedImageProps) => {
   const deleteImg = (photoId: number) => {
     deleteImage.mutate(photoId);
   };
+
   return (
     <>
       <div className="relative h-auto max-w-full pb-[100%]">
