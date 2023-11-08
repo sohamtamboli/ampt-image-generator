@@ -29,7 +29,8 @@
     "notistack": "^3.0.1",
     "query-string": "^8.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-lottie-player": "^1.5.5"
   },
   "devDependencies": {
     "@types/cookie": "^0.5.3",

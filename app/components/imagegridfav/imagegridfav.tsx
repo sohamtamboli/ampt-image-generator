@@ -6,7 +6,8 @@ import { enqueueSnackbar } from 'notistack';
 import React from 'react';
 import Axios from '../../axiosConfig';
 import Spinner from '../SVGs/Spinner';
-
+import Lottie from 'react-lottie-player'
+import Lottie_Loader from '../loader/lottie-loader.json';
 type IBookmarkedImagesResponse = {
   id: number;
   value: string;
@@ -55,7 +56,13 @@ const ImageGridFav: React.FC = () => {
   if (isLoading) {
     return (
       <div className="mt-4 grid h-[100%] w-[100%] place-items-center">
-        <Spinner large />
+        {/* <Spinner large /> */}
+        <Lottie
+          loop
+          animationData={Lottie_Loader}
+          play
+          style={{ width: 950, height: 450 }}
+        />
       </div>
     );
   }
