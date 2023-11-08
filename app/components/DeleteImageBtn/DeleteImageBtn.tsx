@@ -4,6 +4,7 @@ import Spinner from '../SVGs/Spinner';
 
 type DeleteImageBtnProps = {
   isLoading: boolean;
+  isDisabled: boolean;
   imgId: number;
   deleteImg: (id: number) => void;
 };
@@ -11,14 +12,15 @@ type DeleteImageBtnProps = {
 const DeleteImageBtn = ({
   imgId,
   isLoading,
+  isDisabled,
   deleteImg,
 }: DeleteImageBtnProps) => {
   return (
     <button
       type="button"
-      disabled={isLoading}
+      disabled={isLoading || isDisabled}
       onClick={() => deleteImg(imgId)}
-      className="absolute right-4 top-4 rounded-lg bg-red-700 px-3 py-3 text-sm font-medium text-white hover:bg-red-800 focus:outline-none"
+      className="rounded-lg bg-red-700 px-3 py-3 text-sm font-medium text-white hover:bg-red-800 focus:outline-none disabled:cursor-not-allowed"
     >
       {isLoading ? <Spinner /> : <DeleteIcon />}
       <span className="sr-only">Delete Image</span>
