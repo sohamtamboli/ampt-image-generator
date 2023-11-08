@@ -26,7 +26,9 @@ const HomePage = () => {
   const [query, setQuery] = useState('');
   const [showImgGrid, setShowImgGrid] = useState(false);
   const [savedPrompt, setSavedPrompt] = useState('');
-
+ const handlePromptClick = (clickedPrompt:string) => {
+   setQuery(clickedPrompt);
+ };
   const {
     mutate,
     data: hookData,
@@ -106,7 +108,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="flex h-fit justify-center md:flex-[0.35]">
-          <PromptCard />
+          <PromptCard onPromptClick={handlePromptClick} />
         </div>
       </div>
     </Layout>

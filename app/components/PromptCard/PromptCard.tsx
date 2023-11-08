@@ -2,9 +2,18 @@
 
 import React, { Fragment, useRef, useState } from 'react';
 import Prompts from './Prompts';
+import clipboard from '@/public/images/clipboard.svg';
+import Image from 'next/image';
+import { enqueueSnackbar } from 'notistack';
 
-const PromptCard = () => {
+interface PromptCardProps {
+  onPromptClick: (prompt: string) => void;
+}
+const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [hoveredPromptIndex, setHoveredPromptIndex] = useState<number | null>(
+    null,
+  );
   const promptRef = useRef<HTMLParagraphElement>(null);
 
   // This is the function we wrote earlier
@@ -17,19 +26,28 @@ const PromptCard = () => {
   }
 
   // onClick handler function for the copy button
-  const handleCopyClick = () => {
-    console.log('it ran', promptRef?.current?.innerText);
+  const handleCopyClick = (prompt: string) => {
+    console.log('it ran', prompt);
     // Asynchronously call copyTextToClipboard
-    copyTextToClipboard(promptRef?.current?.innerText ?? '')
+    copyTextToClipboard(prompt)
       .then(() => {
         // If successful, update the isCopied state value
         setIsCopied(true);
         setTimeout(() => {
           setIsCopied(false);
         }, 1500);
+        enqueueSnackbar({
+          message: 'Prompt copied!',
+          variant: 'success',
+        });
       })
+
       .catch((err) => {
         console.log(err);
+        enqueueSnackbar({
+          message: 'Copy failed. Please try again.',
+          variant: 'error',
+        });
       });
   };
 
@@ -52,10 +70,26 @@ const PromptCard = () => {
                   <p
                     className="text-sm font-medium"
                     ref={promptRef}
-                    onClick={handleCopyClick}
+                    onClick={() => {
+                      handleCopyClick(prompt);
+                      // Call the onPromptClick function with the clicked prompt
+                      onPromptClick(prompt);
+                    }}
+                    onMouseEnter={() => setHoveredPromptIndex(idx)}
+                    onMouseLeave={() => setHoveredPromptIndex(null)}
                   >
                     {prompt}
                   </p>
+                  {hoveredPromptIndex === idx && (
+                    <span className="tooltip-text  rounded-lg bg-white px-2 py-1 text-sm text-white opacity-100">
+                      <Image
+                        src={clipboard}
+                        width={50}
+                        height={40}
+                        alt="Picture of the author"
+                      />
+                    </span>
+                  )}
                 </div>
               </li>
               <hr />
