@@ -273,7 +273,7 @@ export default function LoginForm() {
               </div>
 
               <div>
-                <p className="mt-10 text-center text-sm text-gray-500">
+                <p className="mt-10 mb-4 text-center text-sm text-gray-500">
                   Didn&apos;t receive OTP???
                   <a
                     href="#"
