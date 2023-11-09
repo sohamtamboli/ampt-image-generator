@@ -1,7 +1,5 @@
 'use client';
 
-import clipboard from '@/public/images/clipboard.svg';
-import Image from 'next/image';
 import { enqueueSnackbar } from 'notistack';
 import React, { Fragment, useRef, useState } from 'react';
 import Prompts from './Prompts';
@@ -25,7 +23,6 @@ const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
   }
 
   const handleCopyClick = (prompt: string) => {
-    
     copyTextToClipboard(prompt)
       .then(() => {
         setIsCopied(true);
@@ -39,7 +36,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
       })
 
       .catch((err) => {
-     console.error(err);
+        console.error(err);
         enqueueSnackbar({
           message: 'Copy failed. Please try again.',
           variant: 'error',

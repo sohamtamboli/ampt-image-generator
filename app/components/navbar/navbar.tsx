@@ -3,7 +3,7 @@ import AccIcon from '@/public/images/accounticon.svg';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import BookmarkIcon from '../SVGs/BookmarkIcon';
 import HomeIcon from '../SVGs/HomeIcon';
@@ -21,12 +21,11 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     getSession()
       .then((Session) => {
-     
         setStatus(true);
         setUserName(Session.idToken.payload.name);
       })
       .catch((err) => {
-       console.error(err);
+        console.error(err);
       });
   }, [getSession]);
 

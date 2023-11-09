@@ -1,7 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
-import React, { Fragment, useState } from 'react';
-import DeleteImageBtn from '../DeleteImageBtn/DeleteImageBtn';
+import React, { Fragment } from 'react';
 import { IBookmarkedImagesResponse } from './imagegridfav';
 
 type ImageModalProps = {

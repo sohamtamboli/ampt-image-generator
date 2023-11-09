@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Account, AccountContext } from './components/context/accountcontext';
+import { Account } from './components/context/accountcontext';
 import QueryProvider from './components/providers/QueryProvider';
 import ToasterProvider from './components/providers/ToasterProvider';
 import './globals.css';
@@ -8,7 +8,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ampt + Next.js Starter Template',
+  title: 'AMPT Nextjs Image Gen',
 };
 
 export default function RootLayout({

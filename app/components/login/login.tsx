@@ -8,8 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useContext, useState } from 'react';
-import { AccountContext } from '../context/accountcontext';
 import Spinner from '../SVGs/Spinner';
+import { AccountContext } from '../context/accountcontext';
 interface FormState {
   email: string;
   password: string;
@@ -42,16 +42,15 @@ export default function LoginForm() {
       .then((data) => {
         const jwtToken = data.idToken.jwtToken;
         const accessJwt = data?.accessToken?.jwtToken;
-     
+
         Cookies.set('jwtToken', jwtToken);
         Cookies.set('accessTokenJwt', accessJwt);
-        localStorage.setItem('jwt', accessJwt);
-       
+
         setLoading(false);
       })
 
       .catch((err) => {
-       console.error(' failed to login ', err);
+        console.error(' failed to login ', err);
         if (err.name === 'UserNotConfirmedException') {
           setshowconfirmuser(true);
           setLoading(false);
@@ -81,20 +80,19 @@ export default function LoginForm() {
         setLoading(false);
         // Handle error
       } else {
-      
         // OTP verification successful, proceed with further actions
         authenticate(formState.email, formState.password)
           .then((data) => {
             const jwtToken = data.idToken.jwtToken;
-          
+
             Cookies.set('jwtToken', jwtToken);
-          
+
             router.push('/home');
             setLoading(false);
           })
           .catch((err) => {
             setMessage(err.message);
-           console.error(' failed to login ', err);
+            console.error(' failed to login ', err);
             setLoading(false);
           });
       }
@@ -111,7 +109,6 @@ export default function LoginForm() {
       if (err) {
         setMessage(`Error: ${err.message || JSON.stringify(err)}`);
       } else {
-       
         setMessage('OTP sent successfully');
       }
     });
@@ -289,7 +286,7 @@ export default function LoginForm() {
 
                 <button
                   type="submit"
-                  className={`relative flex w-full justify-center rounded-md gap-2 bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
+                  className={`relative flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (

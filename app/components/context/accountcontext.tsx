@@ -61,18 +61,16 @@ const Account: React.FC<AccountProps> = (props) => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (data) => {
-         
           setError('');
           resolve(data);
           router.push('/home');
         },
         onFailure: (err) => {
-           console.error('onFailure : ', err);
+          console.error('onFailure : ', err);
           setError(err.message);
           reject(err);
         },
         newPasswordRequired: (data) => {
-        
           resolve(data);
         },
       });
@@ -83,7 +81,6 @@ const Account: React.FC<AccountProps> = (props) => {
     if (user) {
       Cookies.remove('jwtToken');
       Cookies.remove('accessTokenJwt');
-      localStorage.removeItem('jwt');
       user.signOut();
     }
   };

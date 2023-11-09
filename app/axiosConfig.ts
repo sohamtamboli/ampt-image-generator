@@ -1,13 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-// const token: string | null =
-//   window.localStorage.getItem('jwt') && window.localStorage.getItem('jwt');
 const token: string | null | undefined =
   Cookies.get('accessTokenJwt') && Cookies.get('accessTokenJwt');
 const TOKEN = `Bearer ${token}`;
-
-
 
 const Axios = axios.create({
   // configurations

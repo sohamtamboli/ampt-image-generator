@@ -1,14 +1,10 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
 import { enqueueSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import Lottie from 'react-lottie-player';
 import Axios from '../../axiosConfig';
-import DeleteImageBtn from '../DeleteImageBtn/DeleteImageBtn';
-import DeleteIcon from '../SVGs/DeleteIcon';
-import Spinner from '../SVGs/Spinner';
 import Lottie_Loader from '../loader/lottie-loader.json';
 import BookmarkedImage from './BookmarkedImage';
 
@@ -37,9 +33,7 @@ const ImageGridFav: React.FC = () => {
     }
   }, [error]);
 
-  
-
-  if (isLoading ) {
+  if (isLoading) {
     return (
       <div className="mt-4  flex h-[100%] items-center justify-center sm:grid sm:h-[100%] sm:place-items-center">
         {/* <Spinner large /> */}
