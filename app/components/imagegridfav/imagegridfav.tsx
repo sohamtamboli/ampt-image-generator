@@ -37,11 +37,11 @@ const ImageGridFav: React.FC = () => {
     }
   }, [error]);
 
-  console.log(data, 'fav image');
+  
 
-  if (isLoading) {
+  if (isLoading ) {
     return (
-      <div className="mt-4 grid h-[100%] w-[100%] place-items-center">
+      <div className="mt-4  flex h-[100%] items-center justify-center sm:grid sm:h-[100%] sm:place-items-center">
         {/* <Spinner large /> */}
         <Lottie
           loop

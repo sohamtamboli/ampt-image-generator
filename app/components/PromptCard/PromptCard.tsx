@@ -25,7 +25,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
   }
 
   const handleCopyClick = (prompt: string) => {
-    console.log('it ran', prompt);
+    
     copyTextToClipboard(prompt)
       .then(() => {
         setIsCopied(true);
@@ -39,7 +39,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
       })
 
       .catch((err) => {
-        console.log(err);
+     console.error(err);
         enqueueSnackbar({
           message: 'Copy failed. Please try again.',
           variant: 'error',

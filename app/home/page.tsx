@@ -52,8 +52,8 @@ const HomePage = () => {
       setQuery('');
     },
     onError: (error) => {
-      console.log(error, 'errorr');
-      // console.log(err, 'err');
+      console.error(error, 'errorr');
+     
       enqueueSnackbar({
         message: 'Something went wrong! Please try logging in again!',
         variant: 'error',
@@ -81,7 +81,7 @@ const HomePage = () => {
     mutate(payload);
   };
 
-  // console.log({ hookData });
+
 
   return (
     <Layout>

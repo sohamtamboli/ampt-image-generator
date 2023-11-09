@@ -67,11 +67,10 @@ export default function SignupForm() {
 
         (err, data) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             setLoading(false);
             setregistrationerror(err.message);
           } else {
-            console.log(data);
             setLoading(false);
             //user registerd succesfully
             setregistered(true);
@@ -91,19 +90,16 @@ export default function SignupForm() {
 
     cognitoUser.confirmRegistration(otp, true, (err, result) => {
       if (err) {
-        console.log(err);
+        console.error(err);
         setMessage(err.message);
         setLoading(false);
         // Handle error
       } else {
-        console.log(result);
         // OTP verification successful, proceed with further actions
         authenticate(formState.email, formState.password)
           .then((data) => {
             const jwtToken = data.idToken.jwtToken;
-            console.log('ID Token Data:', jwtToken);
             Cookies.set('jwtToken', jwtToken);
-            console.log('logged in ', data);
             router.push('/home');
             setLoading(false);
           })
@@ -126,7 +122,7 @@ export default function SignupForm() {
       if (err) {
         setMessage(`Error: ${err.message || JSON.stringify(err)}`);
       } else {
-        console.log('call result: ' + JSON.stringify(result));
+     
         setMessage('OTP sent successfully');
       }
     });
@@ -245,7 +241,7 @@ export default function SignupForm() {
               <div>
                 <button
                   type="submit"
-                  className={`relative flex w-full gap-2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
+                  className={`relative flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
@@ -329,7 +325,7 @@ export default function SignupForm() {
 
                 <button
                   type="submit"
-                  className={`focus-visible:outline-indigo-6 gap-2  relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
+                  className={`focus-visible:outline-indigo-6 relative  flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
                 >
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (

@@ -21,12 +21,12 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     getSession()
       .then((Session) => {
-        console.log('session', Session);
+     
         setStatus(true);
         setUserName(Session.idToken.payload.name);
       })
       .catch((err) => {
-        console.error(err);
+       console.error(err);
       });
   }, [getSession]);
 
