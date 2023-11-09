@@ -61,7 +61,7 @@ const Account: React.FC<AccountProps> = (props) => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (data) => {
-          // console.log('onsucess : ', data);
+         
           setError('');
           resolve(data);
           router.push('/home');
@@ -72,7 +72,7 @@ const Account: React.FC<AccountProps> = (props) => {
           reject(err);
         },
         newPasswordRequired: (data) => {
-          // console.log('onsucess : ', data);
+        
           resolve(data);
         },
       });

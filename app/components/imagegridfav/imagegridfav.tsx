@@ -37,7 +37,7 @@ const ImageGridFav: React.FC = () => {
     }
   }, [error]);
 
-  // console.log(data, 'fav image');
+  
 
   if (isLoading ) {
     return (

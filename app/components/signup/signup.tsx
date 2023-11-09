@@ -67,11 +67,10 @@ export default function SignupForm() {
 
         (err, data) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             setLoading(false);
             setregistrationerror(err.message);
           } else {
-            // console.log(data);
             setLoading(false);
             //user registerd succesfully
             setregistered(true);
@@ -91,19 +90,16 @@ export default function SignupForm() {
 
     cognitoUser.confirmRegistration(otp, true, (err, result) => {
       if (err) {
-        console.log(err);
+        console.error(err);
         setMessage(err.message);
         setLoading(false);
         // Handle error
       } else {
-        // console.log(result);
         // OTP verification successful, proceed with further actions
         authenticate(formState.email, formState.password)
           .then((data) => {
             const jwtToken = data.idToken.jwtToken;
-            // console.log('ID Token Data:', jwtToken);
             Cookies.set('jwtToken', jwtToken);
-            // console.log('logged in ', data);
             router.push('/home');
             setLoading(false);
           })
@@ -126,7 +122,7 @@ export default function SignupForm() {
       if (err) {
         setMessage(`Error: ${err.message || JSON.stringify(err)}`);
       } else {
-        // console.log('call result: ' + JSON.stringify(result));
+     
         setMessage('OTP sent successfully');
       }
     });

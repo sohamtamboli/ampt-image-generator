@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     getSession()
       .then((Session) => {
-        // console.log('session', Session);
+     
         setStatus(true);
         setUserName(Session.idToken.payload.name);
       })
