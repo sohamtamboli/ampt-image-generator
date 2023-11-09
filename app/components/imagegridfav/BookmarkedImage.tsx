@@ -43,7 +43,7 @@ const BookmarkedImage = ({ photo }: BookmarkedImageProps) => {
       });
     },
     onSettled: () => {
-      console.log('it ran');
+      // console.log('it ran');
       queryClient.invalidateQueries({ queryKey: ['get-favorites'] });
     },
   });

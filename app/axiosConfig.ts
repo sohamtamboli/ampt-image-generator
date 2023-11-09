@@ -10,7 +10,7 @@ const token: string | null | undefined =
   Cookies.get('accessTokenJwt') && Cookies.get('accessTokenJwt');
 const TOKEN = `Bearer ${token}`;
 
-console.log(TOKEN, 'Token');
+// console.log(TOKEN, 'Token');
 
 const Axios = axios.create({
   // configurations

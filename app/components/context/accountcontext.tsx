@@ -61,18 +61,18 @@ const Account: React.FC<AccountProps> = (props) => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (data) => {
-          console.log('onsucess : ', data);
+          // console.log('onsucess : ', data);
           setError('');
           resolve(data);
           router.push('/home');
         },
         onFailure: (err) => {
-          console.error('onFailure : ', err);
+          // console.error('onFailure : ', err);
           setError(err.message);
           reject(err);
         },
         newPasswordRequired: (data) => {
-          console.log('onsucess : ', data);
+          // console.log('onsucess : ', data);
           resolve(data);
         },
       });
