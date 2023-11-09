@@ -51,7 +51,7 @@ export default function LoginForm() {
       })
 
       .catch((err) => {
-        // console.error(' failed to login ', err);
+       console.error(' failed to login ', err);
         if (err.name === 'UserNotConfirmedException') {
           setshowconfirmuser(true);
           setLoading(false);
@@ -76,7 +76,7 @@ export default function LoginForm() {
 
     cognitoUser.confirmRegistration(otp, true, (err, result) => {
       if (err) {
-        // console.log(err);
+        console.log(err);
         setMessage(err.message);
         setLoading(false);
         // Handle error
@@ -94,7 +94,7 @@ export default function LoginForm() {
           })
           .catch((err) => {
             setMessage(err.message);
-            // console.error(' failed to login ', err);
+           console.error(' failed to login ', err);
             setLoading(false);
           });
       }

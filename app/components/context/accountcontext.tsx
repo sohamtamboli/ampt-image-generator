@@ -67,7 +67,7 @@ const Account: React.FC<AccountProps> = (props) => {
           router.push('/home');
         },
         onFailure: (err) => {
-          // console.error('onFailure : ', err);
+           console.error('onFailure : ', err);
           setError(err.message);
           reject(err);
         },

@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
         setUserName(Session.idToken.payload.name);
       })
       .catch((err) => {
-        // console.error(err);
+       console.error(err);
       });
   }, [getSession]);
 

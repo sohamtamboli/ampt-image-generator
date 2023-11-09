@@ -39,7 +39,7 @@ const PromptCard: React.FC<PromptCardProps> = ({ onPromptClick }) => {
       })
 
       .catch((err) => {
-        // console.log(err);
+     console.log(err);
         enqueueSnackbar({
           message: 'Copy failed. Please try again.',
           variant: 'error',

@@ -67,7 +67,7 @@ export default function SignupForm() {
 
         (err, data) => {
           if (err) {
-            // console.log(err);
+            console.log(err);
             setLoading(false);
             setregistrationerror(err.message);
           } else {
@@ -91,7 +91,7 @@ export default function SignupForm() {
 
     cognitoUser.confirmRegistration(otp, true, (err, result) => {
       if (err) {
-        // console.log(err);
+        console.log(err);
         setMessage(err.message);
         setLoading(false);
         // Handle error
@@ -109,7 +109,7 @@ export default function SignupForm() {
           })
           .catch((err) => {
             setMessage(err.message);
-            // console.error(' failed to login ', err);
+            console.error(' failed to login ', err);
             setLoading(false);
           });
       }
@@ -245,7 +245,7 @@ export default function SignupForm() {
               <div>
                 <button
                   type="submit"
-                  className={`relative flex w-full gap-2 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
+                  className={`relative flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
                 >
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
@@ -329,7 +329,7 @@ export default function SignupForm() {
 
                 <button
                   type="submit"
-                  className={`focus-visible:outline-indigo-6 gap-2  relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
+                  className={`focus-visible:outline-indigo-6 relative  flex w-full justify-center gap-2 rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
                 >
                   <span>{Loading ? 'Signing in' : 'Sign in'}</span>
                   {Loading && (
