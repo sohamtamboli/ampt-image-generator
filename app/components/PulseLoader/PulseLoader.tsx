@@ -6,7 +6,7 @@ const PulseLoader = () => {
       role="status"
       className="flex animate-pulse flex-col gap-4 md:w-full md:flex-row "
     >
-      <div className="flex h-[340px] w-[340px] items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-96 md:h-[500px] md:w-[500px] md:flex-[0.7]">
+      <div className="flex h-[340px] w-[340px] items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-96 md:h-[500px] md:w-[500px] ">
         <svg
           className="h-10 w-10 text-gray-200 dark:text-gray-600"
           aria-hidden="true"
