@@ -88,7 +88,7 @@ const GeneratedImage = ({
             {imageData?.imageUrl ? (
               <div className="flex flex-col gap-4 sm:flex-col md:flex-row ">
                 {/* div added here */}
-                <div className=" relative aspect-square h-[500px] w-[500px] flex-[0.7]">
+                <div className=" relative  aspect-square h-[500px] w-[500px] flex-[0.7]">
                   <Image
                     src={imageData?.imageUrl}
                     priority
@@ -102,8 +102,14 @@ const GeneratedImage = ({
                   />
                 </div>
                 <div className="flex-[0.3]  ">
-                  {/* break-all-added */}
-                  <h3>
+                  {/* break-all-added  with conditional statment*/}
+                  <h3
+                    className={`${
+                      prompt && prompt.length > 20 && !/\s/.test(prompt)
+                        ? 'break-all'
+                        : ''
+                    }`}
+                  >
                     <b>Prompt:</b>
                     <br />
                     <span>{prompt ?? 'not found'}</span>
