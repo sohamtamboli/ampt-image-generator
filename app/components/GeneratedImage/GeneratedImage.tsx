@@ -88,12 +88,12 @@ const GeneratedImage = ({
             {imageData?.imageUrl ? (
               <div className="flex flex-col gap-4 sm:flex-col md:flex-row ">
                 {/* div added here */}
-                <div className=" relative  aspect-square h-[500px] w-[500px] flex-[0.7]">
+                <div className=" relative  aspect-square h-[600px] w-[600px] flex-[0.7]">
                   <Image
                     src={imageData?.imageUrl}
                     priority
                     alt="generated image"
-                    className="aspect-square flex-1"
+                    className="aspect-square  flex-1"
                     layout="fill"
                     objectFit="cover"
                     fill
