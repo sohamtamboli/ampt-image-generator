@@ -98,7 +98,7 @@ export default function SignupForm() {
         // OTP verification successful, proceed with further actions
         authenticate(formState.email, formState.password)
           .then((data) => {
-            const jwtToken = data.idToken.jwtToken;
+            const jwtToken = data.accessToken.jwtToken;
             Cookies.set('jwtToken', jwtToken);
             router.push('/home');
             setLoading(false);
