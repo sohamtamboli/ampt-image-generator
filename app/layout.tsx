@@ -4,6 +4,7 @@ import { Account } from './components/context/accountcontext';
 import QueryProvider from './components/providers/QueryProvider';
 import ToasterProvider from './components/providers/ToasterProvider';
 import './globals.css';
+import RefreshToken from './components/refreshToken/refreshToken';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
       <QueryProvider>
         <html lang="en">
           <body className={inter.className}>
-            <ToasterProvider>{children}</ToasterProvider>
+            <ToasterProvider>
+              <RefreshToken/>
+              {children}</ToasterProvider>
           </body>
         </html>
       </QueryProvider>
