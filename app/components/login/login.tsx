@@ -40,7 +40,7 @@ export default function LoginForm() {
     setLoading(true);
     authenticate(formState.email, formState.password)
       .then((data) => {
-        const jwtToken = data.idToken.jwtToken;
+        const jwtToken = data?.accessToken?.jwtToken;
         const accessJwt = data?.accessToken?.jwtToken;
 
         Cookies.set('jwtToken', jwtToken);
