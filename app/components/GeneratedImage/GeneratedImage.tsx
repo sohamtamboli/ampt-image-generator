@@ -80,29 +80,41 @@ const GeneratedImage = ({
 
   return (
     <>
-      <div className="mx-1 grid place-items-center rounded-lg border-2 border-solid  border-gray-50 bg-gray-50 p-4 sm:mx-auto sm:w-[80%] md:mx-auto md:w-[90%] ">
+      <div className="jusify-center mx-1 flex items-center rounded-lg border-2 border-solid  border-gray-50 bg-gray-50 p-4 sm:mx-auto sm:w-[80%] md:mx-auto md:w-[90%] ">
         {isLoading ? (
           <PulseLoader />
         ) : (
           <>
             {imageData?.imageUrl ? (
-              <div className="flex flex-col gap-4 sm:flex-col md:flex-row">
-                <Image
-                  src={imageData?.imageUrl}
-                  priority
-                  alt="generated image"
-                  className="flex-1"
-                  width={500}
-                  height={500}
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Ww8AAj8BXkQ+xPEAAAAASUVORK5CYII="
-                />
-                <div className="flex-[0.3]">
-                  <h3>
+              <div className="flex flex-col gap-4 sm:flex-col md:flex-row ">
+                {/* div added here */}
+                <div className=" relative  aspect-square h-[600px] w-[600px] flex-[0.7]">
+                  <Image
+                    src={imageData?.imageUrl}
+                    priority
+                    alt="generated image"
+                    className="aspect-square  flex-1"
+                    layout="fill"
+                    objectFit="cover"
+                    fill
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8Ww8AAj8BXkQ+xPEAAAAASUVORK5CYII="
+                  />
+                </div>
+                <div className="flex-[0.3]  ">
+                  {/* break-all-added  with conditional statment*/}
+                  <h3
+                    className={`${
+                      prompt && prompt.length > 15 && !/\s/.test(prompt)
+                        ? 'break-all'
+                        : ''
+                    }`}
+                  >
                     <b>Prompt:</b>
                     <br />
                     <span>{prompt ?? 'not found'}</span>
                   </h3>
+
                   <button
                     type="button"
                     disabled={disableBtn || bookmarkImage.isPending}
