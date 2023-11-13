@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import { Account } from './components/context/accountcontext';
 import QueryProvider from './components/providers/QueryProvider';
 import ToasterProvider from './components/providers/ToasterProvider';
-import './globals.css';
 import RefreshToken from './components/refreshToken/refreshToken';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,8 +23,9 @@ export default function RootLayout({
         <html lang="en">
           <body className={inter.className}>
             <ToasterProvider>
-              <RefreshToken/>
-              {children}</ToasterProvider>
+              <RefreshToken />
+              {children}
+            </ToasterProvider>
           </body>
         </html>
       </QueryProvider>
