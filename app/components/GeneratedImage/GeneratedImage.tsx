@@ -105,7 +105,7 @@ const GeneratedImage = ({
                   {/* break-all-added  with conditional statment*/}
                   <h3
                     className={`${
-                      prompt && prompt.length > 20 && !/\s/.test(prompt)
+                      prompt && prompt.length > 15 && !/\s/.test(prompt)
                         ? 'break-all'
                         : ''
                     }`}
