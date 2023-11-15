@@ -36,7 +36,7 @@ const RefreshToken = () => {
   }, [getSession]);
 
   useEffect(() => {
-    // Call refreshToken every hour
+    // Call refreshToken every 55 minutes
     const interval = setInterval(refreshToken, 55 * 60000);
 
     // Clean up the interval when the component is unmounted
