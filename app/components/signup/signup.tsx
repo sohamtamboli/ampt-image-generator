@@ -31,7 +31,7 @@ export default function SignupForm() {
     username: '',
   });
   const router = useRouter();
-  const { authenticate } = useContext(AccountContext); // added new
+  const { authenticate } = useContext(AccountContext); 
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

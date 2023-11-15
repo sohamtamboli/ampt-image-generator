@@ -9,12 +9,9 @@ const verifier = CognitoJwtVerifier.create({
   clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
 });
 export async function middleware(req: NextRequest) {
- 
   // Check if the user is authenticated
-  
   const cookieStore = cookies();
   const hasCookie = cookieStore.get('jwtToken');
-  // console.log(hasCookie)
   let isAuthenticated = false;
   if (hasCookie) {
     try {
@@ -26,7 +23,6 @@ export async function middleware(req: NextRequest) {
     }
   }
   // User is authenticated if the jwtToken cookie exists
- 
   if (
     !isAuthenticated &&
     !['/login', '/signup'].includes(req.nextUrl.pathname)
