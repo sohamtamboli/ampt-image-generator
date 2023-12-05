@@ -64,12 +64,10 @@ const GeneratedImage = ({
     onSettled: () => {
       setDisableBtn(true);
       setBookmarkSuccess(true);
-    
     },
   });
 
   const handleBookmarkImage = () => {
-    
     if (imageData?.id) {
       const payload: IBookMarkImage = {
         imageId: imageData?.id,
